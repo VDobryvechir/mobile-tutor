@@ -21,6 +21,7 @@ node-modules/
 
 # Expo
 .expo/
+.vs/
 dist/
 web-build/
 expo-env.d.ts
