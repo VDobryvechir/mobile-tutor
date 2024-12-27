@@ -1,13 +1,9 @@
-import React, {useState} from 'react';
-import { StyleSheet } from 'react-native';
-
-import { ExternalLink } from './ExternalLink';
-import { MonoText } from './StyledText';
 import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
-
 import Colors from '@/constants/Colors';
+import { RepetitionProps, RepetitionOptionDefinition } from '@/providers/RepetitionContext';
+import GeneralForm from '@/components/common/general-form/GeneralForm';
 
-export default function OptionsPage({ path }: { path: string }) {
+export default function RepetitionOptions({ repetitionModel, setRepetitionModel }: RepetitionProps) {
     const setRepetitionOption = (obj: any, key: string, val: any) => {
         if (!obj) {
             return;
@@ -28,7 +24,7 @@ export default function OptionsPage({ path }: { path: string }) {
         return (repetitionModel.options as any)[key];
     };
     return (
-        <View style={styles.repetitionForm}
+        <View style={styles.repetitionForm}>
             <GeneralForm source={repetitionModel} setter={setRepetitionOption} getter={getRepetitionOption} fields={RepetitionOptionDefinition } />
         </View>
     );

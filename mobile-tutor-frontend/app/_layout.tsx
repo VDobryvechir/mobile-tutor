@@ -6,7 +6,11 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
-import { useColorScheme } from '@/components/useColorScheme';
+import { useColorScheme } from '@/components/general/useColorScheme';
+import { DEFAULT_LOCALE } from '@/i18n/locales.ts';
+
+import { UserContextProvider } from '@/providers/UserContext';
+
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -47,13 +51,14 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
+        <UserContextProvider defaultLocale={DEFAULT_LOCALE} >
+            <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+                <Stack>
+                   <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                   <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+                </Stack>
+            </ThemeProvider>
+        </UserContextProvider>
   );
 }

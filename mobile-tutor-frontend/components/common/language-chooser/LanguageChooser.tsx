@@ -1,4 +1,6 @@
-﻿import translate from '../../../i18n/translate.tsx';
+﻿import translate from '@/i18n/translate';
+import { Picker } from '@react-native-picker/picker';
+import { StyleSheet } from 'react-native';
 
 interface Props {
     language: string;

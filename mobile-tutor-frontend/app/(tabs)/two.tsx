@@ -1,16 +1,18 @@
 import { StyleSheet } from 'react-native';
+import { useContext } from 'react';
+import RepetitionOptions from '@/pages/options/RepetitionOptions';
+import { Text, View } from '@/components/general/Themed';
+import { UserContext } from '@/providers/UserContext';
+import { normalizeRepetitionModel } from '@/providers/RepetitionContext.ts';
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
-
-export default function TabTwoScreen() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/two.tsx" />
-    </View>
-  );
+export default function TabRepetitionOptionScreen() {
+    const { repetitionModel, setRepetitionModel } = useContext(UserContext);
+    normalizeRepetitionModel(repetitionModel, setRepetitionModel);
+    return (
+      <View style={styles.container}>
+        <RepetitionOptions repetitionModel={repetitionModel} setRepetitionModel={setRepetitionModel} />
+      </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -18,6 +20,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#cccccc',
   },
   title: {
     fontSize: 20,

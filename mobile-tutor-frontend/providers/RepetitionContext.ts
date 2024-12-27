@@ -1,6 +1,7 @@
-import { GeneralFormField, generateGeneralFormDefaults } from '../components/common/general-form/GeneralFormModel';
-import { RepetitionModel, RepetitionOptions } from '../models/RepetitionModel';
+import { GeneralFormField, generateGeneralFormDefaults } from '@/components/common/general-form/GeneralFormModel';
+import { RepetitionModel, RepetitionOptions } from '@/models/RepetitionModel';
 import { getLanguageOfStudy, getActiveLanguagesAsMap } from './StorageUtils';
+import { useEffect } from 'react';
 
 export const RepetitionOptionDefinition: GeneralFormField[] = [
     { 
@@ -109,11 +110,11 @@ export interface RepetitionProps {
     initVerse?: number;
     baseName?: string;
 };
-export const getInitialRepetitionModel = (params: Partial<RepetitionModel>): RepetitionModel => {
-    const options: RepetitionOptions = generateGeneralFormDefaults({}, RepetitionOptionDefinition);
+export async function getInitialRepetitionModel(params: Partial<RepetitionModel>): Promise<RepetitionModel>  {
+    const options: RepetitionOptions = await generateGeneralFormDefaults({}, RepetitionOptionDefinition);
     params = params || {};
     const res: RepetitionModel = {
-        sourceLanguage: params.sourceLanguage || getLanguageOfStudy(),
+        sourceLanguage: params.sourceLanguage || await getLanguageOfStudy(),
         sourceLines: params.sourceLines || [],
         targetLanguages: params.targetLanguages || [],
         targetLines: params.targetLines || [],
@@ -129,6 +130,23 @@ export const getInitialRepetitionModel = (params: Partial<RepetitionModel>): Rep
     };
     return res;
 } 
+
+async function normalizeModel(repetitionModel: RepetitionModel, setRepetitionModel: (model:RepetitionModel)=>void) {
+        if (!repetitionModel) {
+              const model = await getInitialRepetitionModel({});
+              setRepetitionModel(model);
+        }
+}
+
+export async function normalizeRepetitionModel(repetitionModel: RepetitionModel, setRepetitionModel: (model:RepetitionModel)=>void) {
+     useEffect(() => {
+        normalizeModel(repetitionModel, setRepetitionModel); 
+     }, []); 
+}
+
+
+
+
 
 const translationPriorities = ["nb", "en", "uk", "de", "pl", "nn", "it", "fr", "es", "sv", "da", "gr", "ru"];
 

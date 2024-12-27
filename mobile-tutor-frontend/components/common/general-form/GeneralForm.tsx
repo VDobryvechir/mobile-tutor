@@ -1,9 +1,10 @@
-﻿import {useState} from 'react';
+import {useState} from 'react';
 import { GeneralFormField, GeneralGeneratedOptions, GeneralFieldOption } from './GeneralFormModel';
-import translate from '../../../i18n/translate';
+import {useTranslate} from '@/i18n/translate';
 import LanguageChooser from '../language-chooser/LanguageChooser';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from '@react-native-picker/picker';
+import { StyleSheet, View, TextInput, Text } from 'react-native';
 
 interface Props {
     source: any;
@@ -12,6 +13,7 @@ interface Props {
     fields: GeneralFormField[];
 };
 const GeneralForm = ({ source, setter, getter, fields }: Props) => {
+    const translate = useTranslate();
     const initValues: { [key:string]: string } = {};
     fields.forEach((item: GeneralFormField) => {
         initValues[item.field] = "" + getter(source, item.field); 
@@ -116,7 +118,6 @@ const GeneralForm = ({ source, setter, getter, fields }: Props) => {
                 return (
                     <TextInput
                         style={styles.input}
-                        placeholder={item.name}
                         value={tmpValue[item.field]}
                         onChangeText={setNumberKind}
                     />
@@ -135,7 +136,6 @@ const GeneralForm = ({ source, setter, getter, fields }: Props) => {
                 return (
                     <TextInput
                         style={styles.input}
-                        placeholder={item.name}
                         value={getter(source, item.field)}
                         onChangeText={oversetter}
                     />
@@ -156,9 +156,9 @@ const GeneralForm = ({ source, setter, getter, fields }: Props) => {
         <View style={styles.generalForm}>
             {fields.map((item,index) => (
                 <View key={index}>
-                    <View style={styles.fieldLabel}>
+                    <Text style={styles.fieldLabel}>
                         {item.name && translate(item.name) || ""}
-                    </View>
+                    </Text>
                     <View>
                         {getInputByKind(item)}
                     </View>
