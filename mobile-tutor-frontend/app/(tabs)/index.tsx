@@ -6,18 +6,17 @@ import { Text, View } from '@/components/general/Themed';
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Language Tutor</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <MainScreenInfo path="app/(tabs)/index.tsx" />
+          <MainScreenInfo />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    container: {
+        paddingVertical: 18,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'flex-start',
   },
   title: {
     fontSize: 20,

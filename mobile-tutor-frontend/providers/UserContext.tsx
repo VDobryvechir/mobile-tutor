@@ -11,7 +11,9 @@ export const UserContextProvider = ({ children, defaultLocale }: Props) => {
    const [isAuth, setIsAuth] = useState(false);
    const [locale, setLocale] = useState(defaultLocale);
    const [repetitionModel,setRepetitionModel] = useState(null);
-
+    const [resource, setResource] = useState('');
+    const [book, setBook] = useState('');
+    const [chapter, setChapter] = useState('');
    const login = (name:string, pass: string) => {
        fetch("/api/login", {
            method: "POST",
@@ -29,7 +31,13 @@ export const UserContextProvider = ({ children, defaultLocale }: Props) => {
        });
    };
 
-   const value = {
+    const value = {
+        book,
+        setBook,
+        chapter,
+        setChapter,
+        resource,
+        setResource,
        userInfo,
        setUserInfo,
        isAuth,

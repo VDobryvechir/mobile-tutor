@@ -9,13 +9,13 @@ export async function setLanguageOfStudy(lng: string) {
     await AsyncStorage.setItem('lang', lng);
 }
 
-export async function getActiveLanguagesAsArray(): string[]  {
+export async function getActiveLanguagesAsArray(): Promise<string[]>  {
     const s = ((await AsyncStorage.getItem('activeLanguages')) || "").split(",");
     const langs = s.length && s[0] ? s : ['nb', 'en', 'uk', 'de', 'pl'];
     return langs;
 }
 
-export async function getActiveLanguagesAsMap(): { [key: string]: boolean } {
+export async function getActiveLanguagesAsMap(): Promise<{ [key: string]: boolean }> {
     const res: { [key: string]: boolean } = {};
     const langs = await getActiveLanguagesAsArray();
     langs.forEach((lng) => res[lng] = true);
@@ -27,7 +27,7 @@ export async function setActiveLanguagesAsArray(langs: string[]) {
     await AsyncStorage.setItem('activeLanguages', languages);
 }
 
-export async function convertChapterModelToRepetitionModel(chapterModel: ChapterModel, audioPositions: number[]): Partial<RepetitionModel> {
+export async function convertChapterModelToRepetitionModel(chapterModel: ChapterModel, audioPositions: number[]): Promise<Partial<RepetitionModel>> {
     const lng = await getLanguageOfStudy();
     const pos = chapterModel.targetLanguages.findIndex((item: string) => item === lng);
     if (pos < 0) {

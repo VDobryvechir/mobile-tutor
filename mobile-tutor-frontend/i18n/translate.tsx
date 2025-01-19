@@ -1,4 +1,4 @@
-import UserContext from '../providers/UserContext';
+import UserContext from '@/providers/UserContext';
 import { useContext } from 'react';
 import { DEFAULT_LOCALE, LOCALES } from './locales';
 import messages from './messages';

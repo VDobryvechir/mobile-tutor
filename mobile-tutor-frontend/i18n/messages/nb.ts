@@ -7,7 +7,7 @@ export default {
         'Add translation': 'Legg til oversettelse',
         'Additional delay for the source text': 'Ytterligere forsinkelse for kildeteksten i sekunder',
         'Additional delay for the translation': 'Ytterligere forsinkelse for oversettelsen i sekunder',
-        'after n repetitions': 'etter {n} repetisjoner',
+        'after n repetitions': 'etter {0} repetisjoner',
         'After which repetition should the source text be shown': 'Etter hvilken repetisjon skal kildeteksten vises',
         'After which repetition should the translation be shown': 'Etter hvilken repetisjon skal oversettelsen vises',
         'Any': 'Noen',
@@ -100,5 +100,6 @@ export default {
         'nn_full': 'Nynorsk (Norwegian)',
         'nb_full': 'Bokmål (Norwegian)',
         'uk_full': 'Ukrainsk (Ukrainian - Українська)',
+        '~': 'nb',
  }
 }

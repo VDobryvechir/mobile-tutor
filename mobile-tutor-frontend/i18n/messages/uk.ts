@@ -7,7 +7,7 @@ export default {
         'Add translation': 'Додати переклад',
         'Additional delay for the source text': 'Додаткова затримка для тексту джерела в секундах',
         'Additional delay for the translation': 'Додаткова затримка для перекладу в секундах',
-        'after n repetitions': 'після {n} повторень',
+        'after n repetitions': 'після {0} повторень',
         'After which repetition should the source text be shown': 'Після скількох повторень текст джерела з\'являється',
         'After which repetition should the translation be shown': 'Після скількох повторень переклад з\'являється',
         'Any': 'Будь-який',
@@ -100,6 +100,6 @@ export default {
         'nn_full': 'Нюнорск (Norwegian Nynorsk)',
         'nb_full': 'Букмоль (Norwegian Bokmål)',
         'uk_full': 'Українська (Ukrainian)',
-
+        '~': 'uk',
  }
 }

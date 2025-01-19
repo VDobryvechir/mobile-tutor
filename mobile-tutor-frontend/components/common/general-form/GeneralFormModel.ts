@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export type StorageTypes = 'local' | 'session';
+export type StorageTypes = 'local' | 'session' | 'none';
 export interface GeneralFieldOption {
     name: string;
     value: string;

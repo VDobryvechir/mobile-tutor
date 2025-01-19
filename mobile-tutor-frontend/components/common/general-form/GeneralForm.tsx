@@ -19,7 +19,7 @@ const GeneralForm = ({ source, setter, getter, fields }: Props) => {
         initValues[item.field] = "" + getter(source, item.field); 
     });
     const [tmpValue, setTmpValue] = useState(initValues); 
-
+    console.log('tmpValue', tmpValue, source);
     const getInputByKind = (item: GeneralFormField) => {
         const oversetter = (value: any) => {
             setter(source, item.field, value);
@@ -173,7 +173,8 @@ const styles = StyleSheet.create({
   },
   fieldLabel: {
   },
-  input: {
+    input: {
+        backgroundColor: '#fff',
   },
   picker: {
   },  

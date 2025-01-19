@@ -4,6 +4,9 @@ import { RepetitionProps, RepetitionOptionDefinition } from '@/providers/Repetit
 import GeneralForm from '@/components/common/general-form/GeneralForm';
 
 export default function RepetitionOptions({ repetitionModel, setRepetitionModel }: RepetitionProps) {
+    if (!repetitionModel?.options) {
+        return <></>;
+    }
     const setRepetitionOption = (obj: any, key: string, val: any) => {
         if (!obj) {
             return;
@@ -18,6 +21,7 @@ export default function RepetitionOptions({ repetitionModel, setRepetitionModel 
         });
     };
     const getRepetitionOption = (obj: any, key: string): any => {
+        console.log('repetitionGet', repetitionModel, obj, key);
         if (!obj) {
             return "";
         }

@@ -1,77 +1,84 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useContext } from 'react';
+import { Link, Stack } from 'expo-router';
+import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 
 import { ExternalLink } from '@/components/general/ExternalLink';
 import { MonoText } from '@/components/general/StyledText';
-import { Text, View } from '@/components/general/Themed';
+import { UserContext } from '@/providers/UserContext';
+import { useTranslate } from '@/i18n/translate';
 
 import Colors from '@/constants/Colors';
+import PrimaryButton from '../../components/common/primary-button/PrimaryButton';
+import DoubleButton from '../../components/common/double-button/DoubleButton';
+import { getResourceByCode, getBookForResource } from '@/providers/TestMode';
+import TripleButton from '../../components/common/triple-button/TripleButton';
+interface Props {
 
-export default function MainScreenInfo({ path }: { path: string }) {
-  return (
-    <View>
-      <View style={styles.getStartedContainer}>
-        <Text
-          style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          Open up the code for this screen:
-        </Text>
+}
+export default function MainScreenInfo({ }: Props) {
+    const { resource, book, chapter } = useContext(UserContext);
+    const t = useTranslate();
+    const quickTranslate = (item: any) => {
+        if (typeof item !== 'object' || !item) {
+            return '';
+        }
+        return item.translate && item.translate[t('~')] || item.name || '';
+    };
+    if (!resource) {
+        return (
+            <Link href="/resources" >
+                <PrimaryButton text={t('Choose resource')} />
+            </Link>
+        );
+    }
+    const resourceWhole = getResourceByCode(resource);
+    const resourceName = quickTranslate(resourceWhole);
+    if (!book) {
+        return (
+            <DoubleButton
+                textLeft={resourceName}
+                textRight={t('Choose book')}
+                linkLeft="/resources"
+                linkRight="/books"
+                activeLeft="passive"
+                activeRight="active"
+            />
+        );
+    }
+    const bookWhole = getBookForResource(resource, book);
+    const bookName = quickTranslate(bookWhole);
 
-        <View
-          style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-          darkColor="rgba(255,255,255,0.05)"
-          lightColor="rgba(0,0,0,0.05)">
-          <MonoText>{path}</MonoText>
+    return (
+        <View style={styles.bookChapterBlock}>
+            <TripleButton
+                textLeft={resourceName}
+                textMiddle={bookName}
+                textRight={chapter || t('Choose chapter')}
+                linkLeft="/resources"
+                linkMiddle="/books"
+                linkRight="/chapters"
+                activeLeft="passive"
+                activeMiddle="passive"
+                activeRight="active"
+            />
         </View>
-
-        <Text
-          style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          Change any of the text, save the file, and your app will automatically update.
-        </Text>
-      </View>
-
-      <View style={styles.helpContainer}>
-        <ExternalLink
-          style={styles.helpLink}
-          href="https://docs.expo.io/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet">
-          <Text style={styles.helpLinkText} lightColor={Colors.light.tint}>
-            Tap here if your app doesn't automatically update after making changes
-          </Text>
-        </ExternalLink>
-      </View>
-    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
+    bookChapterBlock: {
+        borderRadius: 7,
+        alignItems: 'center',
+        paddingHorizontal: 7,
+        paddingVertical: 3,
+        display: 'flex',
+        height: 20,
+        flexDirection: 'row',
   },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightContainer: {
-    borderRadius: 3,
+  bookBlock: {
     paddingHorizontal: 4,
   },
-  getStartedText: {
-    fontSize: 17,
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  helpContainer: {
-    marginTop: 15,
-    marginHorizontal: 20,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    textAlign: 'center',
+  chapterBlock: {
+    paddingHorizontal: 4,
   },
 });

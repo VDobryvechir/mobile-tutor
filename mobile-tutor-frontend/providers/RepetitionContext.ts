@@ -112,13 +112,14 @@ export interface RepetitionProps {
 };
 export async function getInitialRepetitionModel(params: Partial<RepetitionModel>): Promise<RepetitionModel>  {
     const options: RepetitionOptions = await generateGeneralFormDefaults({}, RepetitionOptionDefinition);
+    console.log('repetition options', options);
     params = params || {};
     const res: RepetitionModel = {
         sourceLanguage: params.sourceLanguage || await getLanguageOfStudy(),
         sourceLines: params.sourceLines || [],
         targetLanguages: params.targetLanguages || [],
         targetLines: params.targetLines || [],
-        activeLanguages: getActiveLanguagesAsMap(),
+        activeLanguages: await getActiveLanguagesAsMap(),
         useDictionary: true,
         audioSource: params.audioSource || '',
         audioPositions: params.audioPositions || [],
@@ -128,6 +129,7 @@ export async function getInitialRepetitionModel(params: Partial<RepetitionModel>
         longLines: params.longLines || [],
         longSource: params.longSource || [],
     };
+    console.log('initial model', res);
     return res;
 } 
 

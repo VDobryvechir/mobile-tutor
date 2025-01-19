@@ -7,7 +7,7 @@ export default {
         'Add translation': 'Legg til omsetjing',
         'Additional delay for the source text': 'Ytterlegare forseinking for kjeldeteksten',
         'Additional delay for the translation': 'Ytterlegare forseinking for omsetjinga',
-        'after n repetitions': 'etter {n} repetisjonar',
+        'after n repetitions': 'etter {0} repetisjonar',
         'After which repetition should the source text be shown': 'Etter kva repetisjon skal kjeldeteksten visast i sekund',
         'After which repetition should the translation be shown': 'Etter kva repetisjon skal omsetjinga visast i sekund',
         'Any': 'Nokon',
@@ -100,6 +100,6 @@ export default {
         'nn_full': 'Nynorsk (Norwegian)',
         'nb_full': 'Bokmål (Norwegian)',
         'uk_full': 'Ukrainsk (Ukrainian - Українська)',
-
+        '~': 'nn',
  }
 }

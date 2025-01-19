@@ -3,14 +3,11 @@ import { Platform, StyleSheet } from 'react-native';
 
 import MainScreenInfo from '@/pages/main-screen/MainScreenInfo';
 import { Text, View } from '@/components/general/Themed';
-
-export default function ModalScreen() {
+import SettingContent from '@/components/common/setting-content/SettingContent';
+export default function SettingsScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Modal</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <MainScreenInfo path="app/modal.tsx" />
-
+      <View style={styles.container}>
+           <SettingContent /> 
       {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
     </View>
@@ -19,9 +16,7 @@ export default function ModalScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 3,
   },
   title: {
     fontSize: 20,
